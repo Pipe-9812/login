@@ -1,0 +1,124 @@
+.box-welcome {
+    background-color: rgba(255,255,255, 0.4);
+    backdrop-filter: blur(10px);
+    border-radius: 1.5rem;
+    padding: 2.5rem 3rem;
+    box-shadow: 0 0 50px 0 rgba(0,0,0, 0.5);
+    user-select: none;
+}
+
+.btn-close-session {
+    background-color: #dc3545;
+    padding: 1rem;
+    text-decoration: none;
+    border-radius: 0.7rem;
+    color: #fff;
+    margin-top: 1.3rem;
+    font-family: arial;
+    display: inline-block;
+    font-weight: bold;
+    transition: .3s;
+}
+
+.btn-close-session:hover {
+    background-color: #c82333;
+    transform: scale(1.04);
+}
+
+.emoji-like-boss {
+  animation: 1s backInDown !important;
+  -webkit-backface-visibility: visible !important;
+    backface-visibility: visible !important;
+}
+
+@-webkit-keyframes backInDown {
+  0% {
+      -webkit-transform: translateY(-1200px) scale(.7);
+      transform: translateY(-1200px) scale(.7);
+      opacity: .7
+  }
+
+  80% {
+      -webkit-transform: translateY(0) scale(.7);
+      transform: translateY(0) scale(.7);
+      opacity: .7
+  }
+
+  to {
+      -webkit-transform: scale(1);
+      transform: scale(1);
+      opacity: 1
+  }
+}
+
+@keyframes backInDown {
+  0% {
+      -webkit-transform: translateY(-1200px) scale(.7);
+      transform: translateY(-1200px) scale(.7);
+      opacity: .7
+  }
+
+  80% {
+      -webkit-transform: translateY(0) scale(.7);
+      transform: translateY(0) scale(.7);
+      opacity: .7
+  }
+
+  to {
+      -webkit-transform: scale(1);
+      transform: scale(1);
+      opacity: 1
+  }
+}
+
+/* _______________________________________________ */
+
+.input-empty {
+  border: 2px solid red !important;
+}
+
+.input-filled {
+  border: 2px solid green !important;
+}
+
+.border-silver {
+  border: 2px solid silver !important;
+}
+
+.alert-sign-in {
+    padding: 1rem;
+    background-color: tomato;
+    border-radius: 0.5rem;
+    color: #370308;
+
+    animation: 1s pulse;
+}
+
+@-webkit-keyframes pulse {
+    0% {
+      -webkit-transform: scaleX(1);
+      transform: scaleX(1);
+    }
+    50% {
+      -webkit-transform: scale3d(1.05, 1.05, 1.05);
+      transform: scale3d(1.05, 1.05, 1.05);
+    }
+    to {
+      -webkit-transform: scaleX(1);
+      transform: scaleX(1);
+    }
+  }
+  @keyframes pulse {
+    0% {
+      -webkit-transform: scaleX(1);
+      transform: scaleX(1);
+    }
+    50% {
+      -webkit-transform: scale3d(1.05, 1.05, 1.05);
+      transform: scale3d(1.05, 1.05, 1.05);
+    }
+    to {
+      -webkit-transform: scaleX(1);
+      transform: scaleX(1);
+    }
+  }

@@ -1,0 +1,20 @@
+{
+    "name": "felipe/login",
+    "description": "Aprendizaje de creacion de login con PHP",
+    "type": "project",
+    "require": {
+        "phpmailer/phpmailer": "^6.9"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Felipe\\Login\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "pipe9812",
+            "email": "felipitocg@gmail.com"
+        }
+    ]
+}

@@ -23,6 +23,17 @@
         die();
     }
 
+    $sql_select_emails = 'SELECT * FROM t_users WHERE user_email = ?';
+    $statement_select_emails = $pdo->prepare($sql_select_emails);
+    $statement_select_emails->execute(array($newEmail));
+
+    $match_emails = $statement_select_emails->fetch();
+
+    if ($match_emails) {
+        header('Location:layout_sign_up.php?alert=4&new_user=' . urlencode($newUser) . '&new_email=' . urlencode($newEmail) . '&new_password=' . urlencode($newPassword) . '&verify_password=' . urlencode($verifyPassword));
+        die();
+    }
+
     $newPasswordHash = password_hash($newPassword, PASSWORD_DEFAULT);
     
     if(password_verify($verifyPassword, $newPasswordHash)) {

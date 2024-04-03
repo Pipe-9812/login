@@ -1,3 +1,45 @@
+<?php
+
+// Validaciones para el campo de Usuario
+$input_class_user = 'input-empty';
+
+// Verificamos si el input 'new_user' está diligenciado
+if (isset($_GET['new_user']) && $_GET['new_user'] !== '') {
+    $input_class_user = 'input-filled';
+}
+
+// Verificamos si existe una alerta (usuario ya existe) y si el campo de usuario no esta diligenciado
+if (isset($_GET['alert']) && $_GET['alert'] == 1 || isset($_GET['new_user']) && $_GET['new_user'] == '') {
+    $input_class_user = 'input-empty';
+} else {
+    // Si no hay alerta, entonces establecemos la clase como "border-silver"
+    if ($input_class_user === 'input-empty') {
+        $input_class_user = 'border-silver';
+    }
+}
+
+// -----------------------------------------------------
+
+// Validaciones para el campo de email
+
+$input_class_email = 'input-empty';
+
+// Verificamos si el input 'new_email' está diligenciado
+if (isset($_GET['new_email']) && $_GET['new_email'] !== '') {
+    $input_class_email = 'input-filled';
+}
+
+// Verificamos si existe una alerta (email ya existe) y si el campo de email no esta diligenciado
+if (isset($_GET['alert']) && $_GET['alert'] == 4 || isset($_GET['new_email']) && $_GET['new_email'] == '') {
+    $input_class_email = 'input-empty';
+} else {
+    // Si no hay alerta, entonces establecemos la clase como "border-silver"
+    if ($input_class_email === 'input-empty') {
+        $input_class_email = 'border-silver';
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -16,7 +58,7 @@
         <div class="box-login">
             <form class="form-login" action="sign_up.php" method="post">
 
-            <?php if ( !isset($_GET["success"]) ) : ?>
+            <?php if ( !isset( $_GET["success"] ) ) : ?>
                 <div class="card-login">
                     <div class="header-login">
                         <h1>Sign Up</h1>
@@ -24,19 +66,27 @@
                     </div>
 
                     <div class="body-login">
-                        <?php if (isset($_GET["alert"]) && $_GET["alert"] == 1) : ?>
+                        <?php if ( isset( $_GET["alert"] ) && $_GET["alert"] == 1 ) : ?>
                             <div class="alert-sign-in">
-                                The user already exists, please try another one.
+                                The <b>username</b> already exists, please try another one.
                             </div>
                         <?php endif; ?>
 
-                        <?php if (isset($_GET["alert"]) && $_GET["alert"] == 3) : ?>
+                        <?php if ( isset( $_GET["alert"] ) && $_GET["alert"] == 3 ) : ?>
                             <div class="alert-sign-in">
                                 Please fill out all fields.
                             </div>
                         <?php endif; ?>
 
-                        <div class="inp <?php echo (isset( $_GET['new_user']) && $_GET['new_user'] !== '' ) ? 'input-filled' : (isset( $_GET['new_user']) ? 'input-empty' : 'border-silver'); ?>">
+                        <!-- <div class="inp <?php echo ( isset( $_GET['new_user']) && $_GET['new_user'] !== '' ) ? 'input-filled' : ( isset( $_GET['new_user'] ) ? 'input-empty' : 'border-silver' ); ?>">
+                            <input placeholder="Username" type="text" name="new_user" 
+                            value="<?php echo isset($_GET['new_user']) ? htmlspecialchars($_GET['new_user']) : ''; ?>">
+                            <span class="box-icon">
+                                <i class="far fa-user"></i>
+                            </span>
+                        </div> -->
+
+                        <div class="inp <?php echo $input_class_user ?>">
                             <input placeholder="Username" type="text" name="new_user" 
                             value="<?php echo isset($_GET['new_user']) ? htmlspecialchars($_GET['new_user']) : ''; ?>">
                             <span class="box-icon">
@@ -44,8 +94,21 @@
                             </span>
                         </div>
 
-                        <div class="inp <?php echo (isset( $_GET['new_email']) && $_GET['new_email'] !== '' ) ? 'input-filled' : (isset( $_GET['new_email']) ? 'input-empty' : 'border-silver' ); ?>" style="margin-bottom: 1rem;">
-                            <input placeholder="Email" type="email" name="new_email">
+                        <?php if ( isset( $_GET["alert"] ) && $_GET["alert"] == 4 ) : ?>
+                            <div class="alert-sign-in">
+                                The <b>email</b> already exists, please try another one.
+                            </div>
+                        <?php endif; ?>
+
+                        <!-- <div class="inp <?php echo ( isset( $_GET['new_email'] ) && $_GET['new_email'] !== '' ) ? 'input-filled' : ( isset( $_GET['new_email'] ) ? 'input-empty' : 'border-silver' ); ?>" style="margin-bottom: 1rem;">
+                            <input placeholder="Email" type="email" name="new_email" value="<?php echo isset( $_GET['new_email'] ) ? htmlspecialchars( $_GET['new_email'] ) : ''; ?>">
+                            <span class="box-icon">
+                                <i class="far fa-envelope"></i>
+                            </span>
+                        </div> -->
+
+                        <div class="inp <?php echo $input_class_email; ?>" style="margin-bottom: 1rem;">
+                            <input placeholder="Email" type="email" name="new_email" value="<?php echo isset( $_GET['new_email'] ) ? htmlspecialchars( $_GET['new_email'] ) : ''; ?>">
                             <span class="box-icon">
                                 <i class="far fa-envelope"></i>
                             </span>

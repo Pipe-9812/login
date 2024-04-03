@@ -46,7 +46,7 @@
                     </div>
 
                     <div class="body-login">
-                        <input type="hidden" name="token" value="<?php htmlspecialchars($token) ?>">
+                        <input type="hidden" name="token" value="<?php echo htmlspecialchars($token) ?>">
 
                         <div class="inp">
                             <input class="password" placeholder="Password" type="password" autocomplete="off" name="new_password">

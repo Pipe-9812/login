@@ -12,7 +12,6 @@
 
     $result = $statement->fetch(PDO::FETCH_ASSOC);
     
-
     if ( $result === false ) {
         die("token not found");
     }
@@ -40,11 +39,10 @@
         
         if( $statement->execute() ) {
             // echo "Password updated. You can now login.";
-            header('Location:reset_password.php?token=' . $token . '&updated=1');
+            header('Location:layout_updated_password.php');
         }
 
     } else {
-        // header('Location:layout_sign_up.php?alert=2');
         header('Location:reset_password.php?token=' . $token . '&alert=2&new_password=' . urlencode($newPassword) . '&verify_password=' . urlencode($verifyPassword) );
         exit();
     }

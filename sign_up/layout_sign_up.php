@@ -140,7 +140,7 @@ if (isset($_GET['alert']) && $_GET['alert'] == 4 || isset($_GET['new_email']) &&
 
                         <span class="link">
                             Already have an Account? &nbsp;
-                            <a href="../sign_in/layout_sign_in.php">Sign in</a>
+                            <a href="../sign_in/layout_sign_in.php"><i class="fa-solid fa-arrow-left"></i>Back to Sign in</a>
                         </span>
                     </div>
                 </div>

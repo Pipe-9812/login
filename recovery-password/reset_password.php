@@ -21,6 +21,24 @@
         die("token has expired");
     }
 
+    // $newPassword = $_POST['new_password'];
+    // $verifyPassword = $_POST['verify_password'];
+    // $newPasswordHash = password_hash($newPassword, PASSWORD_DEFAULT);
+
+    // if( empty($newPassword) || empty($verifyPassword) ) {
+    //     header('Location:reset_password.php?token=' . $token . '&alert=1&new_password=' . urlencode($newPassword) . '&verify_password=' . urlencode($verifyPassword) );
+    //     exit();
+    // }
+
+    // if( password_verify($verifyPassword, $newPasswordHash) ) {
+    //     header('Location:process_reset_password.php');
+    //     exit();
+
+    // } else {
+    //     header('Location:reset_password.php?token=' . $token . '&alert=2&new_password=' . urlencode($newPassword) . '&verify_password=' . urlencode($verifyPassword) );
+    //     exit();
+    // }
+
 ?>
 
 <!DOCTYPE html>
@@ -39,39 +57,75 @@
 
     <div class="container">
         <div class="box-login">
-            <form class="form-login" action="process_reset_password.php" method="post">
-                <div class="card-login">
-                    <div class="header-login">
-                        <h1>Reset Password</h1>
+
+            <?php if ( !isset( $_GET["updated"] ) ) : ?>
+                <form class="form-login" action="process_reset_password.php" method="post">
+                    <div class="card-login">
+                        <div class="header-login">
+                            <h1>Reset Password</h1>
+                            <small>Please enter your new password</small>
+                        </div>
+
+                        <div class="body-login">
+                            <input type="hidden" name="token" value="<?php echo htmlspecialchars($token) ?>">
+
+                            <?php if ( isset( $_GET["alert"] ) && $_GET["alert"] == 1 ) : ?>
+                                <div class="alert-sign-in">
+                                    Please fill out all fields.
+                                </div>
+                            <?php endif; ?>
+
+                            <?php if ( isset($_GET["alert"]) && $_GET["alert"] == 2 ) : ?>
+                                <div class="alert-sign-in">
+                                    Password does not match.
+                                </div>
+                            <?php endif; ?>
+
+                            <div class="inp <?php echo (isset( $_GET['new_password']) && $_GET['new_password'] !== '' ) ? 'input-filled' : (isset( $_GET['new_password']) ? 'input-empty' : 'border-silver' ); ?>">
+                                <input class="password" placeholder="Password" type="password" autocomplete="off" name="new_password" value="<?php echo isset($_GET['new_password']) ? htmlspecialchars($_GET['new_password']) : ''; ?>">
+
+                                <span class="box-icon">
+                                    <i class="far fa-eye icon-toggle" onclick="changeType(this)"></i>
+                                </span>
+                            </div>
+
+                            <div class="inp <?php echo (isset( $_GET['verify_password']) && $_GET['verify_password'] !== '' ) ? 'input-filled' : (isset( $_GET['verify_password']) ? 'input-empty' : 'border-silver' ); ?>">
+                                <input class="password" placeholder="Verify Password" type="password" autocomplete="off" name="verify_password" value="<?php echo isset($_GET['verify_password']) ? htmlspecialchars($_GET['verify_password']) : ''; ?>">
+
+                                <span class="box-icon">
+                                    <i class="far fa-eye icon-toggle" onclick="changeType(this)"></i>
+                                </span>
+                            </div>
+
+                            <button type="submit" class="btn-custom">Send</button>
+
+                            <!-- <span class="link">                           
+                                <a href="../sign_in/layout_sign_in.php">Back to Sign In</a>
+                            </span> -->
+                        </div>
                     </div>
+                </form>
+            <?php endif ?>
 
-                    <div class="body-login">
-                        <input type="hidden" name="token" value="<?php echo htmlspecialchars($token) ?>">
-
-                        <div class="inp">
-                            <input class="password" placeholder="Password" type="password" autocomplete="off" name="new_password">
-
-                            <span class="box-icon">
-                                <i class="far fa-eye icon-toggle" onclick="changeType(this)"></i>
+            <?php if ( isset($_GET["updated"]) && $_GET["updated"] == 1 ) : ?>
+                <div class="form-login">
+                    <div class="card-login">
+                        <div class="alert-success">
+                            <i class="fa-solid fa-lock icon-success"></i>
+                            <span style="text-align: center;">
+                                Password Updated. <br> You can now login
                             </span>
                         </div>
-
-                        <div class="inp">
-                            <input class="password" placeholder="Verify Password" type="password" autocomplete="off" name="verify_password" value="<?php echo isset($_GET['verify_password']) ? htmlspecialchars($_GET['verify_password']) : ''; ?>">
-
-                            <span class="box-icon">
-                                <i class="far fa-eye icon-toggle" onclick="changeType(this)"></i>
-                            </span>
+                        
+                        <div class="body-login" style="margin-top: 1rem;">
+                            <a href="../sign_in/layout_sign_in.php" class="btn-custom">
+                                Go to Log In
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </a>
                         </div>
-
-                        <button type="submit" class="btn-custom">Send</button>
-
-                        <!-- <span class="link">                           
-                            <a href="../sign_in/layout_sign_in.php">Back to Sign In</a>
-                        </span> -->
                     </div>
                 </div>
-            </form>
+            <?php endif; ?>
 
             <div class="img-login">
 

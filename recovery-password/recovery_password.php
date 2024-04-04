@@ -53,3 +53,9 @@
 
     // Redirigir a otra pagina
     echo "Message sent, please check your inbox.";
+    header('Location:../sign_in/layout_sign_in.php?sent=1');
+    exit()
+
+    ?>
+
+

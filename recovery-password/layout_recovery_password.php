@@ -22,6 +22,7 @@
                 <div class="card-login">
                     <div class="header-login">
                         <h1>Recovery Password</h1>
+                        <small>Please enter your email to reset password</small>
                     </div>
 
                     <div class="body-login">
@@ -34,9 +35,9 @@
 
                         <button type="submit" class="btn-custom">Send</button>
 
-                        <span class="link">                           
-                            <a href="../sign_in/layout_sign_in.php">Back to Sign In</a>
-                        </span>
+                        <div class="link">                           
+                            <a href="../sign_in/layout_sign_in.php"><i class="fa-solid fa-arrow-left"></i>Back to Sign In</a>
+                        </div>
                     </div>
                 </div>
             </form>

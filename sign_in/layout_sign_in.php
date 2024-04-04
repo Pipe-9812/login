@@ -18,73 +18,100 @@
 
     <div class="container">
         <div class="box-login">
-            <form id="formLogin" class="form-login" action="sign_in.php" method="post">
-                <div class="card-login">
-                    <div class="header-login">
-                        <!-- <span style="font-size: 2.3rem;">🏠</span> -->
-                        <h1>Welcome Back</h1>
-                        <!-- <small>Please enter your details.</small> -->
-                        <small>Sign in to your account.</small>
-                    </div>
+            <?php if ( !isset($_GET["sent"]) ) : ?>
+                <form id="formLogin" class="form-login" action="sign_in.php" method="post">
+                    <div class="card-login">
+                        <div class="header-login">
+                            <!-- <span style="font-size: 2.3rem;">🏠</span> -->
+                            <h1>Welcome Back</h1>
+                            <!-- <small>Please enter your details.</small> -->
+                            <small>Sign in to your account.</small>
+                        </div>
 
-                    <div class="body-login">
+                        <div class="body-login">
 
-                        <?php if (isset($_GET["alert"]) && $_GET["alert"] == 1) : ?>
-                            <div class="alert-sign-in">
-                                The username or password is incorrect.
+                            <?php if (isset($_GET["alert"]) && $_GET["alert"] == 1) : ?>
+                                <div class="alert-sign-in">
+                                    The username or password is incorrect.
+                                </div>
+                            <?php endif; ?>
+
+                            <?php if (isset($_GET["alert"]) && $_GET["alert"] == 2) : ?>
+                                <div class="alert-sign-in">
+                                    Please complete the <b>Username</b> and <b>Password</b> fields.
+                                </div>
+                            <?php endif; ?>
+
+                            <div class="inp <?php echo (isset($_GET['user_login']) && $_GET['user_login'] !== '') ? 'input-filled' : (isset($_GET['user_login']) ? 'input-empty' : 'border-silver'); ?>">
+                                <input placeholder="Username" type="text" name="user_login" value="<?php echo isset($_GET['user_login']) ? htmlspecialchars($_GET['user_login']) : ''; ?>">
+                                <span class="box-icon">
+                                    <i class="far fa-user"></i>
+                                </span>
                             </div>
-                        <?php endif; ?>
 
-                        <?php if (isset($_GET["alert"]) && $_GET["alert"] == 2) : ?>
-                            <div class="alert-sign-in">
-                                Please complete the <b>Username</b> and <b>Password</b> fields.
+                            <div class="inp <?php echo (isset($_GET['password_login']) && $_GET['password_login'] !== '') ? 'input-filled' : (isset($_GET['password_login']) ? 'input-empty' : 'border-silver'); ?>">
+                                <input class="password" placeholder="Password" type="password" autocomplete="off" name="password_login" value="<?php echo isset($_GET['password_login']) ? htmlspecialchars($_GET['password_login']) : ''; ?>">
+
+                                <span class="box-icon password">
+                                    <i class="far fa-eye icon-toggle" onclick="changeType(this)"></i>
+                                </span>
                             </div>
-                        <?php endif; ?>
 
-                        <div class="inp <?php echo (isset($_GET['user_login']) && $_GET['user_login'] !== '') ? 'input-filled' : (isset($_GET['user_login']) ? 'input-empty' : 'border-silver'); ?>">
-                            <input placeholder="Username" type="text" name="user_login" value="<?php echo isset($_GET['user_login']) ? htmlspecialchars($_GET['user_login']) : ''; ?>">
-                            <span class="box-icon">
-                                <i class="far fa-user"></i>
+                            <div class="remember">
+                                <div>
+                                    <input id="remember" type="checkbox" class="checkbox-custom">
+        
+                                    <label for="remember" class="lbl-custom">Remember for 30 days</label>
+                                </div>
+
+                                <a href="../recovery-password/layout_recovery_password.php" id="link">Forgot password?</a>
+                            </div>
+
+                            <button type="submit" class="btn-custom">Sign In</button>
+
+                            <span class="link">
+                                Are you new here? &nbsp;                            
+                                <a href="../sign_up/layout_sign_up.php">Create an account</a>
                             </span>
                         </div>
 
-                        <div class="inp <?php echo (isset($_GET['password_login']) && $_GET['password_login'] !== '') ? 'input-filled' : (isset($_GET['password_login']) ? 'input-empty' : 'border-silver'); ?>">
-                            <input class="password" placeholder="Password" type="password" autocomplete="off" name="password_login" value="<?php echo isset($_GET['password_login']) ? htmlspecialchars($_GET['password_login']) : ''; ?>">
+                        <div class="footer-login">
+                            <div class="line-divider"></div>
 
-                            <span class="box-icon password">
-                                <i class="far fa-eye icon-toggle" onclick="changeType(this)"></i>
-                            </span>
-                        </div>
-
-                        <div class="remember">
-                            <div>
-                                <input id="remember" type="checkbox" class="checkbox-custom">
-    
-                                <label for="remember" class="lbl-custom">Remember for 30 days</label>
+                            <div class="box-social">
+                                <a class="item-social" href=""><img src="../img/icon_apple.png" alt=""></a>
+                                <a class="item-social" href=""><img src="../img/icon_google.png" alt=""></a>
+                                <a class="item-social" href=""><img src="../img/icon_facebook.png" alt=""></a>
                             </div>
-
-                            <a href="../recovery-password/layout_recovery_password.php" id="link">Forgot password?</a>
                         </div>
-
-                        <button type="submit" class="btn-custom">Sign In</button>
-
-                        <span class="link">
-                            Don't have an Account? &nbsp;                            
-                            <a href="../sign_up/layout_sign_up.php">Sign Up</a>
-                        </span>
                     </div>
+                </form>
+            <?php endif ?>
 
-                    <div class="footer-login">
-                        <div class="line-divider"></div>
+            <?php if ( isset($_GET["sent"]) && $_GET["sent"] == 1 ) : ?>
+                <div class="form-login">
+                    <div class="card-login">
+                        <div class="alert-success">
+                            <i class="fa-regular fa-circle-check icon-success"></i>
+                            <span style="text-align: center;">
+                                Message sent. <br> Please check your email.
+                                <hr style="margin-block: 0.7rem;">
+                                <small style="color: black; font-weight: normal;">
+                                    If you don't see the message, check your spam folder.
+                                </small>
+                            </span>
 
-                        <div class="box-social">
-                            <a class="item-social" href=""><img src="../img/icon_apple.png" alt=""></a>
-                            <a class="item-social" href=""><img src="../img/icon_google.png" alt=""></a>
-                            <a class="item-social" href=""><img src="../img/icon_facebook.png" alt=""></a>
+                        </div>
+                        
+                        <div class="body-login" style="margin-top: 1rem;">
+                            <a href="../sign_in/layout_sign_in.php" class="btn-custom">
+                                <i class="fa-solid fa-arrow-left"></i>
+                                Back to Log In
+                            </a>
                         </div>
                     </div>
                 </div>
-            </form>
+            <?php endif; ?>
 
             <div class="img-login">
                 <!-- <img class="img" src="img/abstract.png" alt=""> -->
